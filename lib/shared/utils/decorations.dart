@@ -1,0 +1,18 @@
+import 'package:flutter/material.dart';
+
+BoxDecoration radiusAllDecoration(double radius) {
+  return BoxDecoration(borderRadius: BorderRadius.circular(radius));
+}
+
+BoxDecoration radiusTopDecoration(double radius) {
+  return BoxDecoration(
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(radius), topRight: Radius.circular(radius)));
+}
+
+BoxDecoration radiusBottomDecoration(double radius) {
+  return BoxDecoration(
+      borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(radius),
+          bottomRight: Radius.circular(radius)));
+}
