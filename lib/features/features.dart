@@ -1,2 +1,2 @@
 export 'main_app.dart';
-export 'home/home.dart';
+export 'image_picker/image_picker.dart';
