@@ -6,12 +6,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case routeMain:
       return MaterialPageRoute(
-        builder: (context) => ImagePickerPage(),
+        builder: (context) => IdentityFormPage(),
       );
       break;
     default:
       return MaterialPageRoute(
-        builder: (context) => ImagePickerPage(),
+        builder: (context) => IdentityFormPage(),
       );
   }
 }

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as ui;
 
 import '../../../lib.dart';
 
@@ -13,11 +12,11 @@ class ImagePickerTmp extends StatefulWidget {
 
 class _ImagePickerTmpState extends State<ImagePickerTmp> {
   File image;
+
   Future<void> pickImage({ImageSource source, String text}) async {
-    File img = await watermarkImagePicker(text: 'sample', source: source);
-    print('OK');
+    final pickedFile = await picker.getImage(source: source);
     setState(() {
-      image = img;
+      image = File(pickedFile.path);
     });
   }
 
@@ -37,6 +36,9 @@ class _ImagePickerTmpState extends State<ImagePickerTmp> {
               image != null
                   ? ImageFileAtm(
                       file: image,
+                      width: 323,
+                      height: 204,
+                      fit: BoxFit.fill,
                     )
                   : Container(
                       width: 323,

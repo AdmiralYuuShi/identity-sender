@@ -1,4 +1,4 @@
-package com.example.init_flutter
+package com.example.identity_sender
 
 import io.flutter.embedding.android.FlutterActivity
 

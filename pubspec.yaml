@@ -1,4 +1,4 @@
-name: init_flutter
+name: identity_sender
 description: A new Flutter project.
 publish_to: 'none'
 version: 1.0.0+1
@@ -20,6 +20,9 @@ dependencies:
   cached_network_image: ^2.1.0+1
   image_picker: ^0.6.0+9
   image: ^2.1.14
+  firebase_core: ^0.5.0
+  cloud_firestore: ^0.14.0+1
+  firebase_storage: ^4.0.0
 
 dev_dependencies:
   flutter_test:
