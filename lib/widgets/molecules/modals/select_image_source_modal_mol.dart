@@ -46,7 +46,7 @@ class SelectImageSourceModalMol {
               AppDimens.verticalSpace2,
               ButtonFlatAtm(
                 width: 80,
-                text: 'Later',
+                text: 'Cancel',
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 onPressed: () {

@@ -7,4 +7,8 @@ List<BlocProvider> providers = [
     create: (context) => IdentityBloc(
         repository: IdentityRepository(provider: IdentityProvider())),
   ),
+  BlocProvider<AuthBloc>(
+    create: (context) =>
+        AuthBloc(repository: AuthRepository(provider: AuthProvider())),
+  ),
 ];

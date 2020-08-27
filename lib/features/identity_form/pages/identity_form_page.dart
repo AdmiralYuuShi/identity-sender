@@ -17,6 +17,6 @@ class _IdentityFormPageState extends State<IdentityFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ImagePickerTmp();
+    return IdentityFormTmp();
   }
 }
