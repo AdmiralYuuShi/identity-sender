@@ -28,7 +28,8 @@ class IdentityBloc extends Bloc<IdentityEvent, IdentityState> {
   }
 
   Stream<IdentityState> _mapGetAllIdentityToState(GetAllIdentity event) async* {
-    _animeFavSubs = repository.getAllIdentity().listen((data) {
+    _animeFavSubs =
+        repository.getAllIdentity(userId: event.userId).listen((data) {
       add(IdentityUpdated(data: data));
     }, onError: (e) {
       print(e);

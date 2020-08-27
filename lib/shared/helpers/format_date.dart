@@ -27,3 +27,7 @@ String formatTimeOfDay(TimeOfDay tod) {
   final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
   return DateFormat("HH:mm").format(dt);
 }
+
+String getStringFormattedDateMonthNameTime(DateTime date) {
+  return new DateFormat("dd MMM yyyy HH.mm.ss").format(date);
+}

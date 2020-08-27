@@ -10,12 +10,6 @@ class IdentityFormPage extends StatefulWidget {
 
 class _IdentityFormPageState extends State<IdentityFormPage> {
   @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<IdentityBloc>(context).add(GetAllIdentity());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return IdentityFormTmp();
   }

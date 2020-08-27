@@ -11,6 +11,8 @@ class AskToLoginModalMol {
           return BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is LogedIn) {
+                BlocProvider.of<IdentityBloc>(context)
+                    .add(GetAllIdentity(userId: state.userId));
                 Navigator.of(context).pop();
               }
             },

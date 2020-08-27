@@ -18,7 +18,14 @@ class AddIdentity extends IdentityEvent {
   List<Object> get props => [request];
 }
 
-class GetAllIdentity extends IdentityEvent {}
+class GetAllIdentity extends IdentityEvent {
+  final String userId;
+
+  GetAllIdentity({@required this.userId}) : assert(userId != null);
+
+  @override
+  List<Object> get props => [userId];
+}
 
 class IdentityUpdated extends IdentityEvent {
   final List<IdentityResponse> data;

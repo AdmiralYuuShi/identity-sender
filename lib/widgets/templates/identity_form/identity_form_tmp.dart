@@ -11,6 +11,7 @@ class IdentityFormTmp extends StatefulWidget {
 }
 
 class _IdentityFormTmpState extends State<IdentityFormTmp> {
+  final ScrollController scrollController = ScrollController();
   File selectedImage;
   String type = 'KTP';
   String desc = '';
@@ -26,6 +27,7 @@ class _IdentityFormTmpState extends State<IdentityFormTmp> {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: ListView(
+              controller: scrollController,
               children: [
                 AppDimens.verticalSpace20,
                 ImagePickerOrg(
@@ -78,9 +80,16 @@ class _IdentityFormTmpState extends State<IdentityFormTmp> {
                           type: type,
                           description: desc,
                           image: selectedImage,
-                          userId: (state as LogedIn).userId,
+                          userId: state is LogedIn ? state.userId : '',
                           dateUpload: DateTime.now()),
-                    )
+                    ),
+                    AppDimens.verticalSpace20,
+                    CustomShape.horizontalLine(),
+                    AppDimens.verticalSpace20,
+                    MyIdentitySentOrg(
+                      scrollController: scrollController,
+                    ),
+                    AppDimens.verticalSpace20,
                   ],
                 ),
               ],

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:meta/meta.dart';
 
 import '../../../lib.dart';
 
@@ -11,8 +12,12 @@ class IdentityProvider {
   final StorageReference storageReference =
       FirebaseStorage().ref().child('simfotos');
 
-  Stream<List<IdentityResponse>> getAllIdentity() {
-    return identityRef.snapshots().map((response) {
+  Stream<List<IdentityResponse>> getAllIdentity({@required String userId}) {
+    return identityRef
+        .where('user_id', isEqualTo: userId)
+        .orderBy('date_upload', descending: true)
+        .snapshots()
+        .map((response) {
       return response.docs
           .map((document) => IdentityResponse.fromJson(document.data()))
           .toList();
