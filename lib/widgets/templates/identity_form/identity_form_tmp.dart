@@ -22,77 +22,70 @@ class _IdentityFormTmpState extends State<IdentityFormTmp> {
           title: 'Identity Sender',
           withoutBack: true,
         ),
-        body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              AppDimens.verticalSpace20,
-              ImagePickerOrg(
-                onImageSelected: (value) {
-                  setState(() {
-                    selectedImage = value;
-                  });
-                },
-              ),
-              AppDimens.verticalSpace20,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text20Atm(
-                    text: 'Type',
-                    textStyle: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  AppDimens.verticalSpace10,
-                  DropdownButtonAtm(
-                    selected: type,
-                    items: ['KTP', 'SIM'],
-                    values: ['KTP', 'SIM'],
-                    onChanged: (v) {
-                      setState(() {
-                        type = v;
-                      });
-                    },
-                  ),
-                  AppDimens.verticalSpace20,
-                  Text20Atm(
-                    text: 'Description',
-                    textStyle: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  AppDimens.verticalSpace10,
-                  TextFieldBorderedAtm(
-                    hintText: 'Type the Description...',
-                    hintTextStyle: TextStyle(color: colorGrey),
-                    maxLines: 4,
-                    onChanged: (v) {
-                      setState(() {
-                        desc = v;
-                      });
-                    },
-                  ),
-                  AppDimens.verticalSpace20,
-                  Align(
-                    alignment: Alignment.center,
-                    child: ButtonPrimaryAtm(
-                      width: 200,
-                      text: 'Send',
-                      onPressed: () {
-                        if (desc.length >= 1 && selectedImage != null) {
-                          BlocProvider.of<IdentityBloc>(context)
-                              .add(AddIdentity(
-                                  request: IdentityRequest(
-                            image: selectedImage,
-                            description: desc,
-                            type: type,
-                            dateUpload: DateTime.now(),
-                          )));
-                        }
+        body: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: ListView(
+              children: [
+                AppDimens.verticalSpace20,
+                ImagePickerOrg(
+                  authState: state,
+                  onImageSelected: (value) {
+                    setState(() {
+                      selectedImage = value;
+                    });
+                  },
+                ),
+                AppDimens.verticalSpace20,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text20Atm(
+                      text: 'Type',
+                      textStyle: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    AppDimens.verticalSpace10,
+                    DropdownButtonAtm(
+                      selected: type,
+                      items: ['KTP', 'SIM'],
+                      values: ['KTP', 'SIM'],
+                      onChanged: (v) {
+                        setState(() {
+                          type = v;
+                        });
                       },
                     ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ));
+                    AppDimens.verticalSpace20,
+                    Text20Atm(
+                      text: 'Description',
+                      textStyle: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    AppDimens.verticalSpace10,
+                    TextFieldBorderedAtm(
+                      hintText: 'Type the Description...',
+                      hintTextStyle: TextStyle(color: colorGrey),
+                      maxLines: 4,
+                      onChanged: (v) {
+                        setState(() {
+                          desc = v;
+                        });
+                      },
+                    ),
+                    AppDimens.verticalSpace20,
+                    SendFormButtonOrg(
+                      authState: state,
+                      request: IdentityRequest(
+                          type: type,
+                          description: desc,
+                          image: selectedImage,
+                          userId: (state as LogedIn).userId,
+                          dateUpload: DateTime.now()),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          );
+        }));
   }
 }

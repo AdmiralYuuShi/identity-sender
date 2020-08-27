@@ -7,7 +7,9 @@ import '../../../lib.dart';
 
 class ImagePickerOrg extends StatefulWidget {
   final ValueSetter<File> onImageSelected;
-  ImagePickerOrg({Key key, this.onImageSelected}) : super(key: key);
+  final AuthState authState;
+  ImagePickerOrg({Key key, this.onImageSelected, this.authState})
+      : super(key: key);
   @override
   _ImagePickerOrgState createState() => _ImagePickerOrgState();
 }
@@ -30,26 +32,33 @@ class _ImagePickerOrgState extends State<ImagePickerOrg> {
                     )
                   : NoImagePlaceholder()),
           onTap: () {
-            SelectImageSourceModalMol.openModal(
-              context: context,
-              onCameraSelected: () {
-                watermarkImagePicker(source: ImageSource.camera, text: 'Sample')
-                    .then((value) {
-                  setState(() {
-                    image = value;
+            if (widget.authState is LogedIn) {
+              String userId = (widget.authState as LogedIn).userId;
+              SelectImageSourceModalMol.openModal(
+                context: context,
+                onCameraSelected: () {
+                  watermarkImagePicker(source: ImageSource.camera, text: userId)
+                      .then((value) {
+                    setState(() {
+                      image = value;
+                    });
+                    widget.onImageSelected(value);
                   });
-                });
-              },
-              onGallerySelected: () {
-                watermarkImagePicker(
-                        source: ImageSource.gallery, text: 'Sample')
-                    .then((value) {
-                  setState(() {
-                    image = value;
+                },
+                onGallerySelected: () {
+                  watermarkImagePicker(
+                          source: ImageSource.gallery, text: userId)
+                      .then((value) {
+                    setState(() {
+                      image = value;
+                    });
+                    widget.onImageSelected(value);
                   });
-                });
-              },
-            );
+                },
+              );
+            } else {
+              AskToLoginModalMol.openModal(context);
+            }
           },
         ));
   }

@@ -1,50 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../lib.dart';
 import '../../widgets.dart';
 
 class AskToLoginModalMol {
   static Future<void> openModal(BuildContext context) async {
-    switch (await showDialog<bool>(
+    await showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
-          return SimpleDialog(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            children: <Widget>[
-              Text20Atm(
-                text: 'You Must Login to Access This Feature',
-                textAlign: TextAlign.center,
-              ),
-              AppDimens.verticalSpace20,
-              ButtonPrimaryAtm(
-                width: 80,
-                text: 'Login',
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-              AppDimens.verticalSpace2,
-              ButtonFlatAtm(
-                width: 80,
-                text: 'Later',
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-              ),
-            ],
+          return BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is LogedIn) {
+                Navigator.of(context).pop();
+              }
+            },
+            child: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
+              return SimpleDialog(
+                contentPadding:
+                    const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+                children: <Widget>[
+                  Text20Atm(
+                    text: 'You have to login first',
+                    textAlign: TextAlign.center,
+                  ),
+                  AppDimens.verticalSpace20,
+                  state is NotLogedIn
+                      ? ButtonPrimaryAtm(
+                          width: 80,
+                          color: colorRedGoogle,
+                          text: 'Login with Google',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          onPressed: () {
+                            BlocProvider.of<AuthBloc>(context)
+                                .add(LoginEvent());
+                          },
+                        )
+                      : ButtonLoadingAtm(
+                          color: colorRedGoogle,
+                          width: 80,
+                        ),
+                  AppDimens.verticalSpace8,
+                  ButtonFlatAtm(
+                    width: 80,
+                    text: 'Cancel',
+                    fontColor: colorRedHeart,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            }),
           );
-        })) {
-      case true:
-        debugPrint('Login');
-        break;
-      case false:
-        debugPrint('Cancel Login');
-        break;
-    }
+        });
   }
 }

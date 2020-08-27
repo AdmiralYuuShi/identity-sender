@@ -15,9 +15,9 @@ Future<File> watermarkImagePicker(
 
   img.Image decodeImg = img.decodeImage(image.readAsBytesSync());
 
-  img.Image resizeImg = img.copyResize(decodeImg, width: 800, height: 560);
+  img.Image resizeImg = img.copyResize(decodeImg, width: 960, height: 720);
   img.drawString(
-      resizeImg, img.arial_48, 10, resizeImg.height - 60, 'UID : $text');
+      resizeImg, img.arial_48, 10, resizeImg.height - 60, 'ID : $text');
 
   List<int> encodeImage = img.encodeJpg(resizeImg, quality: 100);
 

@@ -12,12 +12,14 @@ class IdentityResponse {
     this.imageUrl,
     this.description,
     this.dateUpload,
+    this.userId,
   });
 
   String type;
   String imageUrl;
   String description;
-  String dateUpload;
+  int dateUpload;
+  String userId;
 
   factory IdentityResponse.fromJson(Map<String, dynamic> json) =>
       IdentityResponse(
@@ -25,6 +27,7 @@ class IdentityResponse {
         imageUrl: json["image_url"],
         description: json["description"],
         dateUpload: json["date_upload"],
+        userId: json["user_id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,5 +35,6 @@ class IdentityResponse {
         "image_url": imageUrl,
         "description": description,
         "date_upload": dateUpload,
+        "user_id": userId,
       };
 }
