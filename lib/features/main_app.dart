@@ -6,7 +6,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Init Project',
+      title: 'Identity Sender',
       locale: Locale('en'),
       theme: ThemeData(
         primaryColor: colorBlueMain,

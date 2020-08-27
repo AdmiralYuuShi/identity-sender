@@ -59,9 +59,8 @@ class MyIdentitySentOrg extends StatelessWidget {
                                       ),
                                       AppDimens.verticalSpace4,
                                       Text16Atm(
-                                        text:
-                                            getStringFormattedDateMonthNameTime(
-                                                dateUpload),
+                                        text: getStringFormattedDateTime(
+                                            dateUpload),
                                       ),
                                       AppDimens.verticalSpace4,
                                       Text16Atm(

@@ -15,8 +15,6 @@ dependencies:
   flutter_bloc: ^4.0.0
   bloc: ^4.0.0
   equatable: ^1.1.1
-  rxdart: ^0.23.1
-  dio: ^3.0.9
   cached_network_image: ^2.1.0+1
   image_picker: ^0.6.0+9
   image: ^2.1.14
