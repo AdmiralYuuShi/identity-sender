@@ -20,7 +20,8 @@ class SendFormButtonOrg extends StatelessWidget {
               BlocProvider.of<IdentityBloc>(context)
                   .add(AddIdentity(request: request));
             } else {
-              print('Not Filled');
+              ConfirmationModalMol.openModal(
+                  context: context, text: 'Please fill all field');
             }
           } else {
             AskToLoginModalMol.openModal(context);

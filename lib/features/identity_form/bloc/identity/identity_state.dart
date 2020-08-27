@@ -14,11 +14,13 @@ class IdentityLoading extends IdentityState {}
 
 class IdentityLoaded extends IdentityState {
   final List<IdentityResponse> response;
+  final bool isAddNew;
 
-  IdentityLoaded({@required this.response}) : assert(response != null);
+  IdentityLoaded({@required this.response, this.isAddNew})
+      : assert(response != null && isAddNew != null);
 
   @override
-  List<Object> get props => [response];
+  List<Object> get props => [response, isAddNew];
 }
 
 class IdentityError extends IdentityState {}

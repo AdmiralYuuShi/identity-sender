@@ -37,11 +37,13 @@ class IdentityBloc extends Bloc<IdentityEvent, IdentityState> {
 
   Stream<IdentityState> _mapAddIdentityToState(AddIdentity event) async* {
     await repository.addIdentity(request: event.request);
+    yield IdentityLoaded(
+        response: (state as IdentityLoaded).response, isAddNew: true);
   }
 
   Stream<IdentityState> _mapIdentityUpdatedToState(
       IdentityUpdated event) async* {
-    yield IdentityLoaded(response: event.data);
+    yield IdentityLoaded(response: event.data, isAddNew: false);
   }
 
   @override
